@@ -18,6 +18,53 @@ class Reparation {
         $this->uuid = $uuid;
     }
 
-    // Getter and Setter methods for each property
+    public function getWorkshopId() {
+        return $this->workshop_id;
+    }
+
+    public function setWorkshopId($workshop_id) {
+        $this->workshop_id = $workshop_id;
+    }
+
+    public function getWorkshopName() {
+        return $this->workshop_name;
+    }
+
+    public function setWorkshopName($workshop_name) {
+        $this->workshop_name = $workshop_name;
+    }
+
+    public function getRegisterDate() {
+        return $this->register_date;
+    }
+
+    public function setRegisterDate($register_date) {
+        $this->register_date = $register_date;
+    }
+
+    public function getLicensePlate() {
+        return $this->license_plate;
+    }
+
+    public function setLicensePlate($license_plate) {
+        $this->license_plate = $license_plate;
+    }
+
+    public function getPhotoPath() {
+        return $this->photo_path;
+    }
+
+    public function setPhotoPath($photo_path) {
+        $this->photo_path = $photo_path;
+    }
+
+    public function getUuid() {
+        return $this->uuid;
+    }
+
+    public function setUuid($uuid) {
+        $this->uuid = $uuid;
+    }
 }
+
 ?>
