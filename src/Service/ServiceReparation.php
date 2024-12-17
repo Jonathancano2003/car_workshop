@@ -1,47 +1,63 @@
 <?php
+
 use Model\Reparation;
-class ServiceReparation {
+
+class ServiceReparation
+{
     private $mysqli;
-    function getDatabaseConnection() {
-        $config = parse_ini_file('config.ini', true);
-    
+
+    function __construct()
+    {
+        $this->mysqli = $this->connect();
+    }
+
+    function connect()
+    {
+        $config =  parse_ini_file('cfg/db_config.ini', true);
         if (!$config || !isset($config['database'])) {
             die('No se pudo cargar la configuración de la base de datos.');
         }
-    
+
         $dbConfig = $config['database'];
         $host = $dbConfig['host'];
         $username = $dbConfig['username'];
         $password = $dbConfig['password'];
         $dbname = $dbConfig['dbname'];
-    
+
         $mysqli = new mysqli($host, $username, $password, $dbname);
-    
+
         if ($mysqli->connect_error) {
             die("Error de conexión: " . $mysqli->connect_error);
         }
-    
+
         return $mysqli;
     }
-    
-    public function getReparation($role, $idReparation): Reparation {
+
+    public function getReparation($role, $idReparation): ?Reparation
+    {
         $stmt = $this->mysqli->prepare("SELECT * FROM reparation WHERE idReparation = ?");
-        $stmt->bind_param("s", $idReparation);
+        $stmt->bind_param("i", $idReparation);
         $stmt->execute();
 
         $result = $stmt->get_result()->fetch_assoc();
-
         $stmt->close();
 
-        $reparation = new Reparation(
-            $result['idWorkshop'],    
-            $result['nameWorkshop'],   
-            $result['registerDate'], 
-            $result['licensePlate'],   
-            $result['photoVehicle'],  
-            $result['idReparation']    
-        );
+        if ($result) {
+            $reparation = new Reparation(
+                $result['idWorkshop'],
+                $result['workshop_name'],
+                $result['register_date'],
+                $result['license_plate'],
+                $result['photo_path'],
+                $result['idReparation']
+            );
+            return $reparation;
+        }
+    }
+    public function checkConnection(): bool
+    {
+        $result = $this->mysqli->query("SELECT 1");  // Realiza una consulta simple
 
-        return $reparation;
+        return $result !== false;  // Retorna true si la consulta fue exitosa
     }
 }
