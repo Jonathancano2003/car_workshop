@@ -33,7 +33,7 @@ class ServiceReparation
         return $mysqli;
     }
 
-    public function getReparation($role, $idReparation): ?Reparation
+    public function getReparation($role, $idReparation)
     {
         $stmt = $this->mysqli->prepare("SELECT * FROM reparation WHERE idReparation = ?");
         $stmt->bind_param("i", $idReparation);

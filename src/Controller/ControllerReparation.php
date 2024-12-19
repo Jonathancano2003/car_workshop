@@ -17,12 +17,12 @@ if (isset($_POST["insertReparation"])) {
 
 function getReparation()
 {
-    $role = $_SESSION['optionRole'];
+    $role = $_SESSION['role'];
     $idReparation = $_POST['uuid'];
 
     $service = new ServiceReparation();
-    $reparation = $service->getReparation($role, $idReparation);
+    $model = $service->getReparation($role, $idReparation);
     $view = new ViewReparation();
-    $view->render($reparation);
+    $view->render($model);
 }
 function insertReparation() {}
