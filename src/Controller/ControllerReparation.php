@@ -25,4 +25,24 @@ function getReparation()
     $view = new ViewReparation();
     $view->render($model);
 }
-function insertReparation() {}
+function insertReparation(): void
+{
+    // Get form data
+    $workshopId = $_POST['workshopId'];
+    $workshopName = $_POST['workshopName'];
+    $registerDate = $_POST['registerDate'];
+    $licensePlate = $_POST['licensePlate'];
+
+    // Insert reparation
+    $service = new ServiceReparation();
+    $reparation = $service->insertReparation(
+        workshopId: $workshopId,
+        workshopName: $workshopName,
+        registerDate: $registerDate,
+        licensePlate: $licensePlate
+    );
+
+    // Pass reparation (model) to view
+    $view = new ViewReparation();
+    $view->render($reparation);
+}

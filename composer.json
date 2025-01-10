@@ -1,12 +1,12 @@
 {
     "require": {
         "monolog/monolog": "^3.8",
-        "intervention/image": "^3.9",
+        "intervention/image": "^3.10",
         "ramsey/uuid": "^4.7"
     },
     "autoload": {
         "psr-4": {
-            "App//": "src/"
+            "App\\": "src/"
         }
     }
 }
